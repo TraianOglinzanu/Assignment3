@@ -1,6 +1,7 @@
 import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
+from time import time
 
 connection = None
 cursor = None

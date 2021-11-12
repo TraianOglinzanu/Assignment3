@@ -1,6 +1,8 @@
 import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
+#from time import time 
+import datetime
 
 connection = None
 cursor = None
@@ -24,42 +26,51 @@ def smallUniformed():
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute("select seller_id from Sellers" )
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def smallSelfOptimized():
     global connection
     db_path = './A3Small.db'
     connect(db_path)
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute("select seller_id from Sellers")
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def smallUserOptimized():
     global connection
     db_path = './A3Small.db'
     connect(db_path)
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute("select seller_id from Sellers")
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def mediumUniformed():
     global connection
@@ -149,14 +160,34 @@ def largeUserOptimized():
     connection.close()
     return
 
-def bar_chart():
+def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     
     return
 
 def main():
     global connection
 
-    # Loop through functions
+    ######## Small Query information to pass to barchart ###########
+
+    one = smallUniformed()
+    two = smallSelfOptimized()
+    three = smallUserOptimized()
+
+    ######## Medium Query information to pass to barchart ###########
+
+    four = mediumUniformed()
+    five = mediumSelfOptimized()
+    six = mediumUserOptimized()
+
+    ######## Large Query information to pass to barchart ###########
+
+    seven = largeUniformed()
+    eight = largeSelfOptimized()
+    nine = largeUserOptimized()
+
+    ######## Pass information to barchart function ############
+
+    bar_chart(one, two, three, four, five, six, seven, eight, nine)
 
     connection.close()
     print("Connection to database closed")
