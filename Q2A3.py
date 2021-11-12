@@ -22,6 +22,8 @@ def smallUniformed():
     db_path = './A3Small.db'
     connect(db_path)
 
+    cursor.execute(' PRAGMA foreign_keys=OFF; ')
+
     Query = '''
 
 
@@ -63,6 +65,8 @@ def mediumUniformed():
     global connection
     db_path = './A3Medium.db'
     connect(db_path)
+
+    cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
     Query = '''
 
@@ -106,6 +110,8 @@ def largeUniformed():
     db_path = './A3Large.db'
     connect(db_path)
 
+    cursor.execute(' PRAGMA foreign_keys=OFF; ')
+
     Query = '''
 
 
@@ -145,7 +151,7 @@ def largeUserOptimized():
 
 def bar_chart():
     
-    print("Query 2 (runtime in ms)")
+    return
 
 def main():
     global connection
