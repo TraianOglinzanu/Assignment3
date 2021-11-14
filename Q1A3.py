@@ -28,7 +28,7 @@ def smallUniformed():
 
     init_time = datetime.datetime.now()
 
-    cursor.execute("select seller_id from Sellers" )
+    cursor.execute(" " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -45,7 +45,7 @@ def smallSelfOptimized():
 
     init_time = datetime.datetime.now()
 
-    cursor.execute("select seller_id from Sellers")
+    cursor.execute(" ")
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -62,7 +62,7 @@ def smallUserOptimized():
 
     init_time = datetime.datetime.now()
 
-    cursor.execute("select seller_id from Sellers")
+    cursor.execute(" ")
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -79,42 +79,51 @@ def mediumUniformed():
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute(" ")
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def mediumSelfOptimized():
     global connection
     db_path = './A3Medium.db'
     connect(db_path)
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute(" ")
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def mediumUserOptimized():
     global connection
     db_path = './A3Medium.db'
     connect(db_path)
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute(" ")
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def largeUniformed():
     global connection
@@ -123,42 +132,51 @@ def largeUniformed():
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute(" ")
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def largeSelfOptimized():
     global connection
     db_path = './A3Large.db'
     connect(db_path)
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute(" ")
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def largeUserOptimized():
     global connection
     db_path = './A3Large.db'
     connect(db_path)
 
-    Query = '''
+    init_time = datetime.datetime.now()
 
+    cursor.execute(" ")
 
-    '''
+    end_time = datetime.datetime.now()
+    exec_time =  end_time - init_time
 
     connection.commit()
     connection.close()
-    return
+
+    return exec_time
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     
