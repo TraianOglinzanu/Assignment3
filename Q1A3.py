@@ -188,8 +188,37 @@ def largeUserOptimized():
     return exec_time
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
+
+    labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
+    uninformed = [one, four, seven]
+    self_optimized = [two, five, eight]
+    user_optimized = [three, six, nine]
+
+    width = 0.4
+
+    fig, ax = plt.subplots()
+
+    #ax.bar()
+
+    ax.set_ylabel("Query runtime")
+    ax.set_title("Query 1")
+    ax.legend()
+
+    tl = "Query_1"
+
+    path = './{}_barchart.png'.format(tl)
+    plt.savefig(path)
+    print('Chart saved to file {}'.format(path))
+
+    plt.close()
     return
+
+    # print(one)
+    # print(four)
+    # print(seven)
+    # print(nine)
+    # return
 
 def main():
     global connection
