@@ -29,7 +29,7 @@ def smallUniformed():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -47,7 +47,7 @@ def smallSelfOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -65,7 +65,7 @@ def smallUserOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -85,7 +85,7 @@ def mediumUniformed():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -103,7 +103,7 @@ def mediumSelfOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -121,7 +121,7 @@ def mediumUserOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -141,7 +141,7 @@ def largeUniformed():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -159,7 +159,7 @@ def largeSelfOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -177,7 +177,7 @@ def largeUserOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(*) FROM ( SELECT c.customer_postal_code FROM Customers c, Orders o WHERE c.customer_id = o.customer_id) " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
