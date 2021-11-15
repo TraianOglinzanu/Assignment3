@@ -1,7 +1,7 @@
 import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
-#from time import time 
+from time import time 
 import datetime
 
 connection = None
@@ -29,7 +29,7 @@ def smallUniformed():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -47,7 +47,7 @@ def smallSelfOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -65,7 +65,7 @@ def smallUserOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -85,7 +85,7 @@ def mediumUniformed():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -100,13 +100,13 @@ def mediumSelfOptimized():
     db_path = './A3Medium.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    tic = time()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
+    toc = time()
+    exec_time =  tic - toc
 
     connection.commit()
     connection.close()
@@ -121,7 +121,7 @@ def mediumUserOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -141,7 +141,7 @@ def largeUniformed():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -159,7 +159,7 @@ def largeSelfOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
@@ -177,8 +177,8 @@ def largeUserOptimized():
     init_time = datetime.datetime.now()
 
     for i in range(50):
-        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = RANDOM() " )
-
+        cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
+        
     end_time = datetime.datetime.now()
     exec_time =  end_time - init_time
 
@@ -199,7 +199,9 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
     fig, ax = plt.subplots()
 
-    #ax.bar()
+    ax.bar(labels, uninformed, width, label="Uninformed")
+    ax.bar(labels, self_optimized, width, label="Self Optimized")
+    ax.bar(labels, user_optimized, width, label="User Optimized")
 
     ax.set_ylabel("Query runtime")
     ax.set_title("Query 1")
