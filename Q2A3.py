@@ -26,6 +26,7 @@ def smallUniformed():
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
+    cursor.execute(' PRAGMA automatic_index=false')
 
     start_time=time.time()
 
@@ -87,6 +88,7 @@ def mediumUniformed():
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
+    cursor.execute(' PRAGMA automatic_index=false')
 
     start_time=time.time()
 
@@ -149,6 +151,7 @@ def largeUniformed():
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
+    cursor.execute(' PRAGMA automatic_index=false')
 
     start_time=time.time()
 
