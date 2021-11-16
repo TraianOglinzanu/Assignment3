@@ -217,10 +217,10 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
 
     ax.set_ylabel("Query runtime in milliseconds")
-    ax.set_title("Query 1")
+    ax.set_title("Query 3")
     ax.legend()
 
-    tl = "Query_1"
+    tl = "Query_3"
 
     path = './{}_barchart.png'.format(tl)
     plt.savefig(path)
