@@ -45,6 +45,9 @@ def smallSelfOptimized():
     db_path = './A3Small.db'
     connect(db_path)
 
+    cursor.execute(' PRAGMA foreign_keys=ON; ')
+    cursor.execute(' PRAGMA automatic_index=true')
+
     start_time=time.time()
 
     for i in range(50):
@@ -104,6 +107,9 @@ def mediumSelfOptimized():
     db_path = './A3Medium.db'
     connect(db_path)
 
+    cursor.execute(' PRAGMA foreign_keys=ON; ')
+    cursor.execute(' PRAGMA automatic_index=true')
+
     start_time=time.time()
 
     for i in range(50):
@@ -162,6 +168,9 @@ def largeSelfOptimized():
     import time
     db_path = './A3Large.db'
     connect(db_path)
+
+    cursor.execute(' PRAGMA foreign_keys=ON; ')
+    cursor.execute(' PRAGMA automatic_index=true')
 
     start_time=time.time()
 
