@@ -1,7 +1,7 @@
 import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
-#from time import time 
+from time import time 
 import datetime
 
 connection = None
@@ -21,18 +21,20 @@ def connect(path):
 
 def smallUniformed():
     global connection
+    import time
     db_path = './A3Small.db'
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    for i in range(50):
+        cursor.execute(" " )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -40,16 +42,18 @@ def smallUniformed():
 
 def smallSelfOptimized():
     global connection
+    import time
     db_path = './A3Small.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    for i in range(50):
+        cursor.execute(" " )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -57,6 +61,7 @@ def smallSelfOptimized():
 
 def smallUserOptimized():
     global connection
+    import time
     db_path = './A3Small.db'
     connect(db_path)
 
@@ -74,18 +79,20 @@ def smallUserOptimized():
 
 def mediumUniformed():
     global connection
+    import time
     db_path = './A3Medium.db'
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    for i in range(50):
+        cursor.execute(" " )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -93,16 +100,18 @@ def mediumUniformed():
 
 def mediumSelfOptimized():
     global connection
+    import time
     db_path = './A3Medium.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    for i in range(50):
+        cursor.execute(" " )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -110,16 +119,18 @@ def mediumSelfOptimized():
 
 def mediumUserOptimized():
     global connection
+    import time
     db_path = './A3Medium.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    for i in range(50):
+        cursor.execute(" " )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -127,18 +138,20 @@ def mediumUserOptimized():
 
 def largeUniformed():
     global connection
+    import time
     db_path = './A3Large.db'
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    for i in range(50):
+        cursor.execute(" " )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -146,16 +159,18 @@ def largeUniformed():
 
 def largeSelfOptimized():
     global connection
+    import time
     db_path = './A3Large.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    for i in range(50):
+        cursor.execute(" " )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -163,24 +178,66 @@ def largeSelfOptimized():
 
 def largeUserOptimized():
     global connection
+    import time
     db_path = './A3Large.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    for i in range(50):
+        cursor.execute(" " )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
     return exec_time
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
+
+    labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
+    uninformed = [one, four, seven]
+    self_optimized = [two, five, eight]
+    user_optimized = [three, six, nine]
+
+    width = 0.4
+
+    fig, ax = plt.subplots()
+
+    uninformed=np.array(uninformed)
+    self_optimized=np.array(self_optimized)
+    user_optimized=np.array(user_optimized)
+
+    ax.bar(labels, uninformed, width, label="Uninformed")
+    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+
+    ax.set_ylabel("Query runtime in milliseconds")
+    ax.set_title("Query 1")
+    ax.legend()
+
+    tl = "Query_1"
+
+    path = './{}_barchart.png'.format(tl)
+    plt.savefig(path)
+    print('Chart saved to file {}'.format(path))
+
+    plt.close()
     return
+
+    # print(one)
+    # print(two)
+    # print(three)
+    # print(four)
+    # print(five)
+    # print(six)
+    # print(seven)
+    # print(eight)
+    # print(nine)
+    # return
 
 def main():
     global connection

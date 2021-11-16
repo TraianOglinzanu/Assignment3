@@ -180,7 +180,43 @@ def largeUserOptimized():
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     
+    labels = ['SmallDB', 'MediumDB', 'LargeDB']
+    
+    uninformed = [one, four, seven]
+    self_optimized = [two, five, eight]
+    user_optimized = [three, six, nine]
+
+    width = 0.4
+
+    fig, ax = plt.subplots()
+
+    ax.bar(labels, uninformed, width, label="Uninformed")
+    ax.bar(labels, self_optimized, width, label="Self Optimized")
+    ax.bar(labels, user_optimized, width, label="User Optimized")
+
+    ax.set_ylabel("Query runtime in milliseconds")
+    ax.set_title("Query 3")
+    ax.legend()
+
+    tl = "Query_3"
+
+    path = './{}_barchart.png'.format(tl)
+    plt.savefig(path)
+    print('Chart saved to file {}'.format(path))
+
+    plt.close()
     return
+
+    # print(one)
+    # print(two)
+    # print(three)
+    # print(four)
+    # print(five)
+    # print(six)
+    # print(seven)
+    # print(eight)
+    # print(nine)
+    # return
 
 def main():
     global connection

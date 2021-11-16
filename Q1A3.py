@@ -21,19 +21,20 @@ def connect(path):
 
 def smallUniformed():
     global connection
+    import time
     db_path = './A3Small.db'
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -41,17 +42,18 @@ def smallUniformed():
 
 def smallSelfOptimized():
     global connection
+    import time
     db_path = './A3Small.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+   
     connection.commit()
     connection.close()
 
@@ -59,17 +61,18 @@ def smallSelfOptimized():
 
 def smallUserOptimized():
     global connection
+    import time
     db_path = './A3Small.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
-
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -77,18 +80,19 @@ def smallUserOptimized():
 
 def mediumUniformed():
     global connection
+    import time
     db_path = './A3Medium.db'
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
 
     connection.commit()
     connection.close()
@@ -97,16 +101,17 @@ def mediumUniformed():
 
 def mediumSelfOptimized():
     global connection
+    import time
     db_path = './A3Medium.db'
     connect(db_path)
 
-    tic = time()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    toc = time()
-    exec_time =  tic - toc
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
 
     connection.commit()
     connection.close()
@@ -115,16 +120,17 @@ def mediumSelfOptimized():
 
 def mediumUserOptimized():
     global connection
+    import time
     db_path = './A3Medium.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
 
     connection.commit()
     connection.close()
@@ -133,18 +139,17 @@ def mediumUserOptimized():
 
 def largeUniformed():
     global connection
+    import time
     db_path = './A3Large.db'
     connect(db_path)
 
-    cursor.execute(' PRAGMA foreign_keys=OFF; ')
-
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
 
     connection.commit()
     connection.close()
@@ -153,16 +158,17 @@ def largeUniformed():
 
 def largeSelfOptimized():
     global connection
+    import time
     db_path = './A3Large.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
 
     connection.commit()
     connection.close()
@@ -171,16 +177,17 @@ def largeSelfOptimized():
 
 def largeUserOptimized():
     global connection
+    import time
     db_path = './A3Large.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
     for i in range(50):
         cursor.execute(" SELECT COUNT(order_id) FROM Customers c, Orders o WHERE c.customer_id = o.customer_id  AND  customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
-        
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
+
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
 
     connection.commit()
     connection.close()
@@ -199,11 +206,15 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
     fig, ax = plt.subplots()
 
-    ax.bar(labels, uninformed, width, label="Uninformed")
-    ax.bar(labels, self_optimized, width, label="Self Optimized")
-    ax.bar(labels, user_optimized, width, label="User Optimized")
+    uninformed=np.array(uninformed)
+    self_optimized=np.array(self_optimized)
+    user_optimized=np.array(user_optimized)
 
-    ax.set_ylabel("Query runtime")
+    ax.bar(labels, uninformed, width, label="Uninformed")
+    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+
+    ax.set_ylabel("Query runtime in milliseconds")
     ax.set_title("Query 1")
     ax.legend()
 
@@ -217,8 +228,13 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     return
 
     # print(one)
+    # print(two)
+    # print(three)
     # print(four)
+    # print(five)
+    # print(six)
     # print(seven)
+    # print(eight)
     # print(nine)
     # return
 
