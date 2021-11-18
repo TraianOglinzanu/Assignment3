@@ -70,11 +70,15 @@ def smallUserOptimized():
 
     start_time=time.time()
 
+    cursor.execute("CREATE INDEX")
+
     for i in range(50):
         cursor.execute(" " )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
@@ -133,11 +137,15 @@ def mediumUserOptimized():
 
     start_time=time.time()
 
+    cursor.execute("CREATE INDEX")
+
     for i in range(50):
         cursor.execute(" " )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
@@ -196,11 +204,15 @@ def largeUserOptimized():
 
     start_time=time.time()
 
+    cursor.execute("CREATE INDEX")
+
     for i in range(50):
         cursor.execute(" " )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
