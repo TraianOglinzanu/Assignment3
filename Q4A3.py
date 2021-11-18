@@ -70,15 +70,11 @@ def smallUserOptimized():
 
     start_time=time.time()
 
-    cursor.execute("CREATE INDEX")
-
     for i in range(50):
         cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
-
-    cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
@@ -137,15 +133,11 @@ def mediumUserOptimized():
 
     start_time=time.time()
 
-    cursor.execute("CREATE INDEX")
-
     for i in range(50):
         cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
-
-    cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
@@ -204,15 +196,11 @@ def largeUserOptimized():
 
     start_time=time.time()
 
-    cursor.execute("CREATE INDEX")
-
     for i in range(50):
         cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
-
-    cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
@@ -221,36 +209,36 @@ def largeUserOptimized():
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     
-    labels = ['SmallDB', 'MediumDB', 'LargeDB']
+    # labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
-    uninformed = [one, four, seven]
-    self_optimized = [two, five, eight]
-    user_optimized = [three, six, nine]
+    # uninformed = [one, four, seven]
+    # self_optimized = [two, five, eight]
+    # user_optimized = [three, six, nine]
 
-    width = 0.4
+    # width = 0.4
 
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
 
-    uninformed=np.array(uninformed)
-    self_optimized=np.array(self_optimized)
-    user_optimized=np.array(user_optimized)
+    # uninformed=np.array(uninformed)
+    # self_optimized=np.array(self_optimized)
+    # user_optimized=np.array(user_optimized)
 
-    ax.bar(labels, uninformed, width, label="Uninformed")
-    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
-    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+    # ax.bar(labels, uninformed, width, label="Uninformed")
+    # ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    # ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
 
-    ax.set_ylabel("Query runtime in milliseconds")
-    ax.set_title("Query 4")
-    ax.legend()
+    # ax.set_ylabel("Query runtime in milliseconds")
+    # ax.set_title("Query 4")
+    # ax.legend()
 
-    tl = "Query_4"
+    # tl = "Query_4"
 
-    path = './{}_barchart.png'.format(tl)
-    plt.savefig(path)
-    print('Chart saved to file {}'.format(path))
+    # path = './{}_barchart.png'.format(tl)
+    # plt.savefig(path)
+    # print('Chart saved to file {}'.format(path))
 
-    plt.close()
-    return
+    # plt.close()
+    # return
 
     # print(one)
     # print(two)
@@ -258,10 +246,10 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # print(four)
     # print(five)
     # print(six)
-    # print(seven)
-    # print(eight)
-    # print(nine)
-    # return
+    print(seven)
+    print(eight)
+    print(nine)
+    return
 
 def main():
     global connection

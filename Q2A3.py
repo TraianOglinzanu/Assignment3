@@ -30,8 +30,12 @@ def smallUniformed():
 
     start_time=time.time()
 
+    #CREATE VIEW HERE. VIEW CAN ONLY BE RUN ONCE 
+    cursor.execute(" CREATE VIEW OrderSize (oid,size) AS SELECT o.order_id,oi.order_item_id FROM Orders o, Order_items oi WHERE o.order_id = oi.order_id")
+
+    #USE VIEW FOR QUERY 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT CAST(os.size AS REAL)/CAST(COUNT(o.oid) AS REAL) average FROM Customers c, OrderSize os,Orders o WHERE c.customer_id = o.customer_id  AND o.order_id = os.oid AND customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -209,38 +213,38 @@ def largeUserOptimized():
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
-    labels = ['SmallDB', 'MediumDB', 'LargeDB']
+    # labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
-    uninformed = [one, four, seven]
-    self_optimized = [two, five, eight]
-    user_optimized = [three, six, nine]
+    # uninformed = [one, four, seven]
+    # self_optimized = [two, five, eight]
+    # user_optimized = [three, six, nine]
 
-    width = 0.4
+    # width = 0.4
 
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
 
-    uninformed=np.array(uninformed)
-    self_optimized=np.array(self_optimized)
-    user_optimized=np.array(user_optimized)
+    # uninformed=np.array(uninformed)
+    # self_optimized=np.array(self_optimized)
+    # user_optimized=np.array(user_optimized)
 
-    ax.bar(labels, uninformed, width, label="Uninformed")
-    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
-    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+    # ax.bar(labels, uninformed, width, label="Uninformed")
+    # ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    # ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
 
-    ax.set_ylabel("Query runtime in milliseconds")
-    ax.set_title("Query 2")
-    ax.legend()
+    # ax.set_ylabel("Query runtime in milliseconds")
+    # ax.set_title("Query 2")
+    # ax.legend()
 
-    tl = "Query_2"
+    # tl = "Query_2"
 
-    path = './{}_barchart.png'.format(tl)
-    plt.savefig(path)
-    print('Chart saved to file {}'.format(path))
+    # path = './{}_barchart.png'.format(tl)
+    # plt.savefig(path)
+    # print('Chart saved to file {}'.format(path))
 
-    plt.close()
-    return
+    # plt.close()
+    # return
 
-    # print(one)
+    print(one)
     # print(two)
     # print(three)
     # print(four)
@@ -249,7 +253,7 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # print(seven)
     # print(eight)
     # print(nine)
-    # return
+    return
 
 def main():
     global connection

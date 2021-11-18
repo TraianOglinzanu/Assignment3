@@ -85,7 +85,7 @@ def smallUserOptimized():
 def mediumUniformed():
     global connection
     import time
-    db_path = './A3Medium.db'
+    db_path = './A3Medium2.db'
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
@@ -148,7 +148,7 @@ def mediumUserOptimized():
 def largeUniformed():
     global connection
     import time
-    db_path = './A3Large.db'
+    db_path = './A3Large2.db'
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
@@ -264,13 +264,13 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
     # print(one)
     # print(two)
-    # # # print(three)
-    # # # print(four)
-    # # # print(five)
-    # # # print(six)
-    # # print(seven)
-    # # print(eight)
-    # # print(nine)
+    # print(three)
+    # print(four)
+    # print(five)
+    # print(six)
+    # print(seven)
+    # print(eight)
+    # print(nine)
     # return
 
 def main():
