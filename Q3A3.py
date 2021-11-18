@@ -22,7 +22,7 @@ def connect(path):
 def smallUniformed():
     global connection
     import time
-    db_path = './A3Small.db'
+    db_path = './A3Small2.db'
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
@@ -31,7 +31,7 @@ def smallUniformed():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT CAST (oi.order_item_id AS REAL)/CAST(COUNT(o.order_id) AS REAL) average FROM Customers c, Orders o, Order_items oi WHERE c.customer_id = o.customer_id  AND o.order_id = oi.order_id AND customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -53,7 +53,7 @@ def smallSelfOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT CAST (oi.order_item_id AS REAL)/CAST(COUNT(o.order_id) AS REAL) average FROM Customers c, Orders o, Order_items oi WHERE c.customer_id = o.customer_id  AND o.order_id = oi.order_id AND customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -71,15 +71,11 @@ def smallUserOptimized():
 
     start_time=time.time()
 
-    cursor.execute("CREATE INDEX")
-
     for i in range(50):
         cursor.execute(" " )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
-
-    cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
@@ -138,15 +134,11 @@ def mediumUserOptimized():
 
     start_time=time.time()
 
-    cursor.execute("CREATE INDEX")
-
     for i in range(50):
         cursor.execute(" " )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
-
-    cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
@@ -205,15 +197,11 @@ def largeUserOptimized():
 
     start_time=time.time()
 
-    cursor.execute("CREATE INDEX")
-
     for i in range(50):
         cursor.execute(" " )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
-
-    # cursor.execute("DROP INDEX")
   
     connection.commit()
     connection.close()
@@ -222,39 +210,39 @@ def largeUserOptimized():
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     
-    labels = ['SmallDB', 'MediumDB', 'LargeDB']
+    # labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
-    uninformed = [one, four, seven]
-    self_optimized = [two, five, eight]
-    user_optimized = [three, six, nine]
+    # uninformed = [one, four, seven]
+    # self_optimized = [two, five, eight]
+    # user_optimized = [three, six, nine]
 
-    width = 0.4
+    # width = 0.4
 
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
 
-    uninformed=np.array(uninformed)
-    self_optimized=np.array(self_optimized)
-    user_optimized=np.array(user_optimized)
+    # uninformed=np.array(uninformed)
+    # self_optimized=np.array(self_optimized)
+    # user_optimized=np.array(user_optimized)
 
-    ax.bar(labels, uninformed, width, label="Uninformed")
-    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
-    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+    # ax.bar(labels, uninformed, width, label="Uninformed")
+    # ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    # ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
 
-    ax.set_ylabel("Query runtime in milliseconds")
-    ax.set_title("Query 3")
-    ax.legend()
+    # ax.set_ylabel("Query runtime in milliseconds")
+    # ax.set_title("Query 3")
+    # ax.legend()
 
-    tl = "Query_3"
+    # tl = "Query_3"
 
-    path = './{}_barchart.png'.format(tl)
-    plt.savefig(path)
-    print('Chart saved to file {}'.format(path))
+    # path = './{}_barchart.png'.format(tl)
+    # plt.savefig(path)
+    # print('Chart saved to file {}'.format(path))
 
-    plt.close()
-    return
+    # plt.close()
+    # return
 
-    # print(one)
-    # print(two)
+    print(one)
+    print(two)
     # print(three)
     # print(four)
     # print(five)
@@ -262,7 +250,7 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # print(seven)
     # print(eight)
     # print(nine)
-    # return
+    return
 
 def main():
     global connection
