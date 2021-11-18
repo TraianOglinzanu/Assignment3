@@ -2,7 +2,6 @@ import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
 from time import time 
-import datetime
 
 connection = None
 cursor = None
@@ -56,8 +55,10 @@ def smallSelfOptimized():
 
     start_time=time.time()
 
+    cursor.execute(" CREATE VIEW OrderSize (oid,size) AS SELECT o.order_id,oi.order_item_id FROM Orders o, Order_items oi WHERE o.order_id = oi.order_id")
+
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT CAST(os.size AS REAL)/CAST(COUNT(o.oid) AS REAL) average FROM Customers c, OrderSize os,Orders o WHERE c.customer_id = o.customer_id  AND o.order_id = os.oid AND customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -73,13 +74,16 @@ def smallUserOptimized():
     db_path = './A3Small.db'
     connect(db_path)
 
-    init_time = datetime.datetime.now()
+    start_time=time.time()
 
-    cursor.execute(" ")
+    cursor.execute(" CREATE VIEW OrderSize (oid,size) AS SELECT o.order_id,oi.order_item_id FROM Orders o, Order_items oi WHERE o.order_id = oi.order_id")
 
-    end_time = datetime.datetime.now()
-    exec_time =  end_time - init_time
+    for i in range(50):
+        cursor.execute(" SELECT CAST(os.size AS REAL)/CAST(COUNT(o.oid) AS REAL) average FROM Customers c, OrderSize os,Orders o WHERE c.customer_id = o.customer_id  AND o.order_id = os.oid AND customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
+    end_time=time.time()
+    exec_time =  (end_time - start_time)*1000
+  
     connection.commit()
     connection.close()
 
@@ -245,8 +249,8 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # return
 
     print(one)
-    # print(two)
-    # print(three)
+    print(two)
+    print(three)
     # print(four)
     # print(five)
     # print(six)

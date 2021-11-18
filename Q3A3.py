@@ -2,7 +2,6 @@ import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
 from time import time 
-import datetime
 
 connection = None
 cursor = None

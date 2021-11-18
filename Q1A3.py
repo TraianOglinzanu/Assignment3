@@ -2,7 +2,6 @@ import sqlite3
 import matplotlib.pyplot as plt
 import numpy as np
 from time import time 
-import datetime
 
 connection = None
 cursor = None
@@ -19,7 +18,7 @@ def connect(path):
     connection.commit()
     return
 
-def smallUniformed():
+def smallUninformed():
     global connection
     import time
     db_path = './A3Small2.db'
@@ -69,6 +68,9 @@ def smallUserOptimized():
     db_path = './A3Small.db'
     connect(db_path)
 
+    # cursor.execute("CREATE INDEX my_customer_index ON Customers (customer_id)")
+    # cursor.execute("CREATE INDEX my_order_index ON Orders (order_id)")
+
     start_time=time.time()
 
     for i in range(50):
@@ -80,9 +82,11 @@ def smallUserOptimized():
     connection.commit()
     connection.close()
 
+    # cursor.execute("DROP INDEX")
+
     return exec_time
 
-def mediumUniformed():
+def mediumUninformed():
     global connection
     import time
     db_path = './A3Medium2.db'
@@ -132,6 +136,9 @@ def mediumUserOptimized():
     db_path = './A3Medium.db'
     connect(db_path)
 
+    # cursor.execute("CREATE INDEX customer_index ON Customers (customer_id)")
+    # cursor.execute("CREATE INDEX order_index ON Orders (order_id)")
+
     start_time=time.time()
 
     for i in range(50):
@@ -145,7 +152,7 @@ def mediumUserOptimized():
 
     return exec_time
 
-def largeUniformed():
+def largeUninformed():
     global connection
     import time
     db_path = './A3Large2.db'
@@ -214,7 +221,7 @@ def largeUserOptimized():
     # cursor.execute(query1)
     # cursor.execute(query2)
 
-    # cursor.execute("CREATE INDEX order_id_index ON Customers (order_id)")
+    # cursor.execute("CREATE INDEX my_customer_id_index ON Customers (customer_id)")
                     
     start_time=time.time()
 
@@ -231,66 +238,69 @@ def largeUserOptimized():
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
-    labels = ['SmallDB', 'MediumDB', 'LargeDB']
+    # labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
-    uninformed = [one, four, seven]
-    self_optimized = [two, five, eight]
-    user_optimized = [three, six, nine]
+    # uninformed = [one, four, seven]
+    # self_optimized = [two, five, eight]
+    # user_optimized = [three, six, nine]
 
-    width = 0.4
+    # width = 0.4
 
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
 
-    uninformed=np.array(uninformed)
-    self_optimized=np.array(self_optimized)
-    user_optimized=np.array(user_optimized)
+    # uninformed=np.array(uninformed)
+    # self_optimized=np.array(self_optimized)
+    # user_optimized=np.array(user_optimized)
 
-    ax.bar(labels, uninformed, width, label="Uninformed")
-    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
-    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+    # ax.bar(labels, uninformed, width, label="Uninformed")
+    # ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    # ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
 
-    ax.set_ylabel("Query runtime in milliseconds")
-    ax.set_title("Query 1")
-    ax.legend()
+    # ax.set_ylabel("Query runtime in milliseconds")
+    # ax.set_title("Query 1")
+    # ax.legend()
 
-    tl = "Query_1"
+    # tl = "Query_1"
 
-    path = './{}_barchart.png'.format(tl)
-    plt.savefig(path)
-    print('Chart saved to file {}'.format(path))
+    # path = './{}_barchart.png'.format(tl)
+    # plt.savefig(path)
+    # print('Chart saved to file {}'.format(path))
 
-    plt.close()
-    return
-
-    # print(one)
-    # print(two)
-    # print(three)
-    # print(four)
-    # print(five)
-    # print(six)
-    # print(seven)
-    # print(eight)
-    # print(nine)
+    # plt.close()
     # return
+
+    # print("Small Unoptimized: " + str(one))
+    # print("Small SelfOptimized: " + str(two))
+    # print("Small UserOptimized: " + str(three))
+
+    # print("Medium Unoptimized: " + str(four))
+    # print("Medium SelfOptimized: " + str(five))
+    # print("Medium UserOptimized: " + str(six))
+
+    print("Large Uninformed: " + str(seven))
+    print("Large Self-optimized: " + str(eight))
+    print("Large User-optimized: " + str(nine))
+
+    return
 
 def main():
     global connection
 
     ######## Small Query information to pass to barchart ###########
 
-    one = smallUniformed()
+    one = smallUninformed()
     two = smallSelfOptimized()
     three = smallUserOptimized()
 
     ######## Medium Query information to pass to barchart ###########
 
-    four = mediumUniformed()
+    four = mediumUninformed()
     five = mediumSelfOptimized()
     six = mediumUserOptimized()
 
     ######## Large Query information to pass to barchart ###########
 
-    seven = largeUniformed()
+    seven = largeUninformed()
     eight = largeSelfOptimized()
     nine = largeUserOptimized()
 
@@ -299,7 +309,6 @@ def main():
     bar_chart(one, two, three, four, five, six, seven, eight, nine)
 
     connection.close()
-    print("Connection to database closed")
   
 if __name__ == "__main__":
     main()
