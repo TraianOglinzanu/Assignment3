@@ -31,7 +31,7 @@ def smallUniformed():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -52,7 +52,7 @@ def smallSelfOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -73,7 +73,7 @@ def smallUserOptimized():
     cursor.execute("CREATE INDEX")
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -97,7 +97,7 @@ def mediumUniformed():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -119,7 +119,7 @@ def mediumSelfOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -140,7 +140,7 @@ def mediumUserOptimized():
     cursor.execute("CREATE INDEX")
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -164,7 +164,7 @@ def largeUniformed():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -186,7 +186,7 @@ def largeSelfOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -207,7 +207,7 @@ def largeUserOptimized():
     cursor.execute("CREATE INDEX")
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code)FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
