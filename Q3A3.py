@@ -55,6 +55,7 @@ def smallSelfOptimized():
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
   
     connection.commit()
     connection.close()
@@ -67,13 +68,33 @@ def smallUserOptimized():
     db_path = './A3Small.db'
     connect(db_path)
 
+    cursor.execute(' PRAGMA foreign_keys=ON; ')
+    cursor.execute(' PRAGMA automatic_index=true')
+
+    cursor.execute("DROP INDEX IF EXISTS a_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS b_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS c_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS d_customer_id_index")
+
+    cursor.execute("CREATE INDEX a_customer_id_index ON Customers(customer_id)")
+    cursor.execute("CREATE INDEX b_customer_id_index ON Orders(customer_id)")
+    cursor.execute("CREATE INDEX c_customer_id_index ON Order_items(order_id)")
+    cursor.execute("CREATE INDEX d_customer_id_index ON Orders(order_id)")
+
+    connection.commit()
+
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" " )
+        cursor.execute(" SELECT CAST (oi.order_item_id AS REAL)/CAST(COUNT(o.order_id) AS REAL) average FROM Customers c, Orders o, Order_items oi WHERE c.customer_id = o.customer_id  AND o.order_id = oi.order_id AND customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP INDEX IF EXISTS a_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS b_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS c_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS d_customer_id_index")
   
     connection.commit()
     connection.close()
@@ -239,9 +260,9 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # plt.close()
     # return
 
-    print("Small Unoptimized: " + str(one))
-    print("Small SelfOptimized: " + str(two))
-    print("Small UserOptimized: " + str(three))
+    print("Small Uninformed: " + str(one))
+    print("Small Self-optimized: " + str(two))
+    print("Small User-optimized: " + str(three))
 
     #print("------------------------------------")
 
@@ -283,7 +304,6 @@ def main():
     bar_chart(one, two, three, four, five, six, seven, eight, nine)
 
     connection.close()
-    print("Connection to database closed")
   
 if __name__ == "__main__":
     main()
