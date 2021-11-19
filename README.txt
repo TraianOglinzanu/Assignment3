@@ -14,6 +14,7 @@ Query #2:
 
 
 Query #3: 
+For this query, we chose to index every column that was being used in the query. 
 
 
 Query #4: 

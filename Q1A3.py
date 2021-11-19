@@ -406,58 +406,58 @@ def largeUserOptimized():
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
-    # labels = ['SmallDB', 'MediumDB', 'LargeDB']
+    labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
-    # uninformed = [one, four, seven]
-    # self_optimized = [two, five, eight]
-    # user_optimized = [three, six, nine]
+    uninformed = [one, four, seven]
+    self_optimized = [two, five, eight]
+    user_optimized = [three, six, nine]
 
-    # width = 0.4
+    width = 0.4
 
-    # fig, ax = plt.subplots()
+    fig, ax = plt.subplots()
 
-    # uninformed=np.array(uninformed)
-    # self_optimized=np.array(self_optimized)
-    # user_optimized=np.array(user_optimized)
+    uninformed=np.array(uninformed)
+    self_optimized=np.array(self_optimized)
+    user_optimized=np.array(user_optimized)
 
-    # ax.bar(labels, uninformed, width, label="Uninformed")
-    # ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
-    # ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+    ax.bar(labels, uninformed, width, label="Uninformed")
+    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
 
-    # ax.set_ylabel("Query runtime in milliseconds")
-    # ax.set_title("Query 1")
-    # ax.legend()
+    ax.set_ylabel("Query runtime in milliseconds")
+    ax.set_title("Query 1")
+    ax.legend()
 
-    # tl = "Query_1"
+    tl = "Query_1"
 
-    # path = './{}_barchart.png'.format(tl)
-    # plt.savefig(path)
-    # print('Chart saved to file {}'.format(path))
+    path = './{}_barchart.png'.format(tl)
+    plt.savefig(path)
+    print('Chart saved to file {}'.format(path))
 
-    # plt.close()
-    # return
-
-    print("          ")
-
-    print("Small Uninformed: " + str(one))
-    print("Small Self-optimized: " + str(two))
-    print("Small User-optimized: " + str(three))
-
-    print("------------------------------------")
-
-    print("Medium Uninformed: " + str(four))
-    print("Medium Self-optimized: " + str(five))
-    print("Medium User-optimized: " + str(six))
-
-    print("------------------------------------")
-
-    print("Large Uninformed: " + str(seven))
-    print("Large Self-optimized: " + str(eight))
-    print("Large User-optimized: " + str(nine))
-
-    print("          ")
-
+    plt.close()
     return
+
+    # print("          ")
+
+    # print("Small Uninformed: " + str(one))
+    # print("Small Self-optimized: " + str(two))
+    # print("Small User-optimized: " + str(three))
+
+    # print("------------------------------------")
+
+    # print("Medium Uninformed: " + str(four))
+    # print("Medium Self-optimized: " + str(five))
+    # print("Medium User-optimized: " + str(six))
+
+    # print("------------------------------------")
+
+    # print("Large Uninformed: " + str(seven))
+    # print("Large Self-optimized: " + str(eight))
+    # print("Large User-optimized: " + str(nine))
+
+    # print("          ")
+
+    # return
 
 def main():
     global connection
