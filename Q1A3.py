@@ -78,7 +78,6 @@ def smallUninformed():
     cursor.execute("DROP TABLE Orders")
     connection.commit()
     cursor.execute("DROP TABLE Sellers")
-
     connection.commit()
 
     cursor.execute("ALTER TABLE CustomersOriginal RENAME TO Customers")

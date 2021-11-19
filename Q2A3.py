@@ -72,8 +72,14 @@ def smallUniformed():
     for i in range(50):
         cursor.execute(" SELECT CAST(os.size AS REAL)/CAST(COUNT(o.oid) AS REAL) average FROM Customers c, OrderSize os,Orders o WHERE c.customer_id = o.customer_id  AND o.order_id = os.oid AND customer_postal_code = (SELECT c.customer_postal_code FROM Customers c ORDER BY random() LIMIT 1);" )
 
+    cursor.execute("DROP VIEW IF EXISTS OrderSize")
+    connection.commit()
+
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP VIEW IF EXISTS OrderSize")
+    connection.commit()
 
     cursor.execute("DROP TABLE Customers")
     connection.commit()
@@ -82,7 +88,6 @@ def smallUniformed():
     cursor.execute("DROP TABLE Orders")
     connection.commit()
     cursor.execute("DROP TABLE Sellers")
-
     connection.commit()
 
     cursor.execute("ALTER TABLE CustomersOriginal RENAME TO Customers")
