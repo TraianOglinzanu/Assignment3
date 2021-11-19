@@ -169,13 +169,29 @@ def mediumUserOptimized():
 def largeUninformed():
     global connection
     import time
-    db_path = './A3Large2.db'
+    db_path = './A3Large.db'
     connect(db_path)
-
-    # cursor.execute("ALTER TABLE A3Large RENAME TO A3LargeOriginal")
-    # cursor.execute("ALTER TABLE A3Large2 RENAME TO A3Large")
-
     cursor.execute(' PRAGMA automatic_index=false')
+
+    cursor.execute(" CREATE TABLE "CustomersNew" (	"customer_id"	TEXT,	"customer_postal_code"	INTEGER;")
+    cursor.execute(" CREATE TABLE "Order_itemsNew" (	"order_id"	TEXT,	"order_item_id"	INTEGER,	"product_id"	INTEGER,	"seller_id"	INTEGER); ")
+    cursor.execute(" CREATE TABLE "Orders" ("order_id"	TEXT,"customer_id"	INTEGER); ")
+    cursor.execute(" CREATE TABLE "Sellers" ("seller_id"	TEXT,"seller_postal_code"	INTEGER); ")
+
+    cursor.execute("INSERT INTO CustomersNew SELECT customer_id, customer_postal_code FROM Customers ")
+    cursor.execute("INSERT INTO Order_itemsNew SELECT order_id, order_item_id, product_id, seller_id FROM Order_items ")
+    cursor.execute("INSERT INTO OrdersNew SELECT order_id, customer_id FROM Orders ")
+    cursor.execute("INSERT INTO SellersNew SELECT seller_id, seller_postal_code FROM Sellers ")
+
+    cursor.execute("ALTER TABLE Customers RENAME TO CustomersOriginal")
+    cursor.execute("ALTER TABLE Order_items RENAME TO Order_itemsOriginal")
+    cursor.execute("ALTER TABLE Orders RENAME TO OrdersOriginal")
+    cursor.execute("ALTER TABLE Sellers RENAME TO SellersOriginal")
+
+    cursor.execute("ALTER TABLE CustomersNew RENAME TO Customers")
+    cursor.execute("ALTER TABLE Order_itemsNew RENAME TO Order_items")
+    cursor.execute("ALTER TABLE OrdersNew RENAME TO Orders")
+    cursor.execute("ALTER TABLE SellersNew RENAME TO Sellers")
 
     start_time=time.time()
 
@@ -185,8 +201,15 @@ def largeUninformed():
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
 
-    # cursor.execute("DROP TABLE")
-    # cursor.execute("ALTER TABLE A3LargeOriginal RENAME TO A3Large")
+    cursor.execute("DROP TABLE Customers")
+    cursor.execute("DROP TABLE Order_items")
+    cursor.execute("DROP TABLE Orders")
+    cursor.execute("DROP TABLE Sellers")
+
+    cursor.execute("ALTER TABLE CustomersOriginal RENAME TO Customers")
+    cursor.execute("ALTER TABLE Order_itemsOriginal RENAME TO Order_items")
+    cursor.execute("ALTER TABLE OrdersOriginal RENAME TO Orders")
+    cursor.execute("ALTER TABLE SellersOriginal RENAME TO Sellers")
 
     connection.commit()
     connection.close()
@@ -247,36 +270,36 @@ def largeUserOptimized():
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
-    labels = ['SmallDB', 'MediumDB', 'LargeDB']
+    # labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
-    uninformed = [one, four, seven]
-    self_optimized = [two, five, eight]
-    user_optimized = [three, six, nine]
+    # uninformed = [one, four, seven]
+    # self_optimized = [two, five, eight]
+    # user_optimized = [three, six, nine]
 
-    width = 0.4
+    # width = 0.4
 
-    fig, ax = plt.subplots()
+    # fig, ax = plt.subplots()
 
-    uninformed=np.array(uninformed)
-    self_optimized=np.array(self_optimized)
-    user_optimized=np.array(user_optimized)
+    # uninformed=np.array(uninformed)
+    # self_optimized=np.array(self_optimized)
+    # user_optimized=np.array(user_optimized)
 
-    ax.bar(labels, uninformed, width, label="Uninformed")
-    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
-    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+    # ax.bar(labels, uninformed, width, label="Uninformed")
+    # ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    # ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
 
-    ax.set_ylabel("Query runtime in milliseconds")
-    ax.set_title("Query 1")
-    ax.legend()
+    # ax.set_ylabel("Query runtime in milliseconds")
+    # ax.set_title("Query 1")
+    # ax.legend()
 
-    tl = "Query_1"
+    # tl = "Query_1"
 
-    path = './{}_barchart.png'.format(tl)
-    plt.savefig(path)
-    print('Chart saved to file {}'.format(path))
+    # path = './{}_barchart.png'.format(tl)
+    # plt.savefig(path)
+    # print('Chart saved to file {}'.format(path))
 
-    plt.close()
-    return
+    # plt.close()
+    # return
 
     # print("Small Unoptimized: " + str(one))
     # print("Small SelfOptimized: " + str(two))
@@ -290,11 +313,11 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
     #print("------------------------------------")
 
-    # print("Large Uninformed: " + str(seven))
-    # print("Large Self-optimized: " + str(eight))
-    # print("Large User-optimized: " + str(nine))
+    print("Large Uninformed: " + str(seven))
+    print("Large Self-optimized: " + str(eight))
+    print("Large User-optimized: " + str(nine))
 
-    # return
+    return
 
 def main():
     global connection

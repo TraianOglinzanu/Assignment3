@@ -248,16 +248,23 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # plt.close()
     # return
 
-    print(one)
-    print(two)
-    print(three)
-    # print(four)
-    # print(five)
-    # print(six)
-    # print(seven)
-    # print(eight)
-    # print(nine)
-    return
+    # print("Small Unoptimized: " + str(one))
+    # print("Small SelfOptimized: " + str(two))
+    # print("Small UserOptimized: " + str(three))
+
+    #print("------------------------------------")
+
+    # print("Medium Unoptimized: " + str(four))
+    # print("Medium SelfOptimized: " + str(five))
+    # print("Medium UserOptimized: " + str(six))
+
+    #print("------------------------------------")
+
+    # print("Large Uninformed: " + str(seven))
+    # print("Large Self-optimized: " + str(eight))
+    # print("Large User-optimized: " + str(nine))
+
+    # return
 
 def main():
     global connection

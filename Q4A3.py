@@ -24,7 +24,6 @@ def smallUniformed():
     db_path = './A3Small.db'
     connect(db_path)
 
-    cursor.execute(' PRAGMA foreign_keys=OFF; ')
     cursor.execute(' PRAGMA automatic_index=false')
 
     start_time=time.time()
@@ -67,10 +66,19 @@ def smallUserOptimized():
     db_path = './A3Small.db'
     connect(db_path)
 
+    cursor.execute("DROP INDEX IF EXISTS mya_index")
+    cursor.execute("DROP INDEX IF EXISTS myb_index")
+
+    cursor.execute("CREATE INDEX mya_index ON Order_items(seller_id)")
+    cursor.execute("CREATE INDEX myb_index ON Sellers(seller_id)")
+
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute("SELECT DISTINCT(s.seller_postal_code), COUNT(seller_postal_code) FROM Order_items oi LEFT JOIN Sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+
+    cursor.execute("DROP INDEX IF EXISTS mya_index")
+    cursor.execute("DROP INDEX IF EXISTS myb_index")
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -239,15 +247,22 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # plt.close()
     # return
 
-    # print(one)
-    # print(two)
-    # print(three)
-    # print(four)
-    # print(five)
-    # print(six)
-    print(seven)
-    print(eight)
-    print(nine)
+    print("Small Unoptimized: " + str(one))
+    print("Small SelfOptimized: " + str(two))
+    print("Small UserOptimized: " + str(three))
+
+    # print("------------------------------------")
+
+    # print("Medium Unoptimized: " + str(four))
+    # print("Medium SelfOptimized: " + str(five))
+    # print("Medium UserOptimized: " + str(six))
+
+    # print("------------------------------------")
+
+    # print("Large Uninformed: " + str(seven))
+    # print("Large Self-optimized: " + str(eight))
+    # print("Large User-optimized: " + str(nine))
+
     return
 
 def main():
@@ -276,7 +291,6 @@ def main():
     bar_chart(one, two, three, four, five, six, seven, eight, nine)
 
     connection.close()
-    print("Connection to database closed")
   
 if __name__ == "__main__":
     main()
