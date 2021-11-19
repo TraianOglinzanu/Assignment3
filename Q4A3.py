@@ -66,7 +66,7 @@ def smallUniformed():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -105,7 +105,7 @@ def smallSelfOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -130,7 +130,7 @@ def smallUserOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute("SELECT COUNT(DISTINCT seller_postal_code) FROM Order_items oi LEFT JOIN Sellers s ON s.seller_id = oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     cursor.execute("DROP INDEX IF EXISTS mya_index")
     cursor.execute("DROP INDEX IF EXISTS myb_index")
@@ -191,7 +191,7 @@ def mediumUniformed():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -231,7 +231,7 @@ def mediumSelfOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -250,7 +250,7 @@ def mediumUserOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -308,7 +308,7 @@ def largeUniformed():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -348,7 +348,7 @@ def largeSelfOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
@@ -367,7 +367,7 @@ def largeUserOptimized():
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute(" SELECT DISTINCT(s.seller_postal_code),  COUNT(seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute(" SELECT COUNT(DISTINCT seller_postal_code) FROM order_items oi LEFT JOIN sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
