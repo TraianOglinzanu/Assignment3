@@ -68,8 +68,13 @@ def smallUserOptimized():
     db_path = './A3Small.db'
     connect(db_path)
 
-    # cursor.execute("CREATE INDEX my_customer_index ON Customers (customer_id)")
-    # cursor.execute("CREATE INDEX my_order_index ON Orders (order_id)")
+    cursor.execute("DROP INDEX IF EXISTS my7_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS my7_customer_id_index")
+
+    cursor.execute("CREATE INDEX my7_customer_id_index ON Customers(customer_id)")
+    cursor.execute("CREATE INDEX my8_customer_id_index ON Orders(customer_id)")
+
+    connection.commit()
 
     start_time=time.time()
 
@@ -78,11 +83,12 @@ def smallUserOptimized():
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
-  
+
+    cursor.execute("DROP INDEX IF EXISTS my7_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS my8_customer_id_index")
+
     connection.commit()
     connection.close()
-
-    # cursor.execute("DROP INDEX")
 
     return exec_time
 
@@ -136,8 +142,13 @@ def mediumUserOptimized():
     db_path = './A3Medium.db'
     connect(db_path)
 
-    # cursor.execute("CREATE INDEX customer_index ON Customers (customer_id)")
-    # cursor.execute("CREATE INDEX order_index ON Orders (order_id)")
+    cursor.execute("DROP INDEX IF EXISTS my5_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS my6_customer_id_index")
+
+    cursor.execute("CREATE INDEX my5_customer_id_index ON Customers(customer_id)")
+    cursor.execute("CREATE INDEX my6_customer_id_index ON Orders(customer_id)")
+
+    connection.commit()
 
     start_time=time.time()
 
@@ -146,6 +157,9 @@ def mediumUserOptimized():
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP INDEX IF EXISTS my5_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS my6_customer_id_index")
 
     connection.commit()
     connection.close()
@@ -158,7 +172,9 @@ def largeUninformed():
     db_path = './A3Large2.db'
     connect(db_path)
 
-    cursor.execute(' PRAGMA foreign_keys=OFF; ')
+    # cursor.execute("ALTER TABLE A3Large RENAME TO A3LargeOriginal")
+    # cursor.execute("ALTER TABLE A3Large2 RENAME TO A3Large")
+
     cursor.execute(' PRAGMA automatic_index=false')
 
     start_time=time.time()
@@ -168,6 +184,9 @@ def largeUninformed():
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    # cursor.execute("DROP TABLE")
+    # cursor.execute("ALTER TABLE A3LargeOriginal RENAME TO A3Large")
 
     connection.commit()
     connection.close()
@@ -202,27 +221,14 @@ def largeUserOptimized():
     db_path = './A3Large.db'
     connect(db_path)
 
-    # query1 = '''
-    #                     CREATE TABLE Customers (
-    #                     customer_id TEXT,
-    #                     customer_postal_code INTEGER,
-    #                     PRIMARY KEY(customer_id)
-    #                     ) WITHOUT ROWID;
-    #                 '''
-    
-    # query2 = '''
-    #                 CREATE TABLE ORDERS (
-    #                     order_id TEXT,
-    #                     customer_id TEXT,
-    #                     PRIMARY KEY(order_id)
-    #                 ) WITHOUT ROWID;
-    #                '''
+    cursor.execute("DROP INDEX IF EXISTS my3_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS my4_customer_id_index")
 
-    # cursor.execute(query1)
-    # cursor.execute(query2)
+    cursor.execute("CREATE INDEX my3_customer_id_index ON Customers(customer_id)")
+    cursor.execute("CREATE INDEX my4_customer_id_index ON Orders(customer_id)")
 
-    # cursor.execute("CREATE INDEX my_customer_id_index ON Customers (customer_id)")
-                    
+    connection.commit()
+
     start_time=time.time()
 
     for i in range(50):
@@ -231,6 +237,9 @@ def largeUserOptimized():
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
 
+    cursor.execute("DROP INDEX IF EXISTS my3_customer_id_index")
+    cursor.execute("DROP INDEX IF EXISTS my4_customer_id_index")
+
     connection.commit()
     connection.close()
 
@@ -238,50 +247,54 @@ def largeUserOptimized():
 
 def bar_chart(one, two, three, four, five, six, seven, eight, nine):
 
-    # labels = ['SmallDB', 'MediumDB', 'LargeDB']
+    labels = ['SmallDB', 'MediumDB', 'LargeDB']
     
-    # uninformed = [one, four, seven]
-    # self_optimized = [two, five, eight]
-    # user_optimized = [three, six, nine]
+    uninformed = [one, four, seven]
+    self_optimized = [two, five, eight]
+    user_optimized = [three, six, nine]
 
-    # width = 0.4
+    width = 0.4
 
-    # fig, ax = plt.subplots()
+    fig, ax = plt.subplots()
 
-    # uninformed=np.array(uninformed)
-    # self_optimized=np.array(self_optimized)
-    # user_optimized=np.array(user_optimized)
+    uninformed=np.array(uninformed)
+    self_optimized=np.array(self_optimized)
+    user_optimized=np.array(user_optimized)
 
-    # ax.bar(labels, uninformed, width, label="Uninformed")
-    # ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
-    # ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
+    ax.bar(labels, uninformed, width, label="Uninformed")
+    ax.bar(labels, self_optimized, width, bottom = uninformed, label="Self Optimized")
+    ax.bar(labels, user_optimized, width, bottom=uninformed+self_optimized, label="User Optimized")
 
-    # ax.set_ylabel("Query runtime in milliseconds")
-    # ax.set_title("Query 1")
-    # ax.legend()
+    ax.set_ylabel("Query runtime in milliseconds")
+    ax.set_title("Query 1")
+    ax.legend()
 
-    # tl = "Query_1"
+    tl = "Query_1"
 
-    # path = './{}_barchart.png'.format(tl)
-    # plt.savefig(path)
-    # print('Chart saved to file {}'.format(path))
+    path = './{}_barchart.png'.format(tl)
+    plt.savefig(path)
+    print('Chart saved to file {}'.format(path))
 
-    # plt.close()
-    # return
+    plt.close()
+    return
 
     # print("Small Unoptimized: " + str(one))
     # print("Small SelfOptimized: " + str(two))
     # print("Small UserOptimized: " + str(three))
 
+    #print("------------------------------------")
+
     # print("Medium Unoptimized: " + str(four))
     # print("Medium SelfOptimized: " + str(five))
     # print("Medium UserOptimized: " + str(six))
 
-    print("Large Uninformed: " + str(seven))
-    print("Large Self-optimized: " + str(eight))
-    print("Large User-optimized: " + str(nine))
+    #print("------------------------------------")
 
-    return
+    # print("Large Uninformed: " + str(seven))
+    # print("Large Self-optimized: " + str(eight))
+    # print("Large User-optimized: " + str(nine))
+
+    # return
 
 def main():
     global connection
