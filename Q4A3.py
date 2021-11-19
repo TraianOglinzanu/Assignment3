@@ -124,13 +124,13 @@ def smallUserOptimized():
     cursor.execute("DROP INDEX IF EXISTS mya_index")
     cursor.execute("DROP INDEX IF EXISTS myb_index")
 
-    cursor.execute("CREATE INDEX mya_index ON Order_items(seller_id)")
+    cursor.execute("CREATE INDEX mya_index ON Order_items(seller_id, order_id, order_item_id)")
     cursor.execute("CREATE INDEX myb_index ON Sellers(seller_id)")
 
     start_time=time.time()
 
     for i in range(50):
-        cursor.execute("SELECT DISTINCT(s.seller_postal_code), COUNT(seller_postal_code) FROM Order_items oi LEFT JOIN Sellers s ON s.seller_id =oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
+        cursor.execute("SELECT COUNT(DISTINCT seller_postal_code) FROM Order_items oi LEFT JOIN Sellers s ON s.seller_id = oi.seller_id WHERE oi.order_id=(SELECT o.order_id FROM  Orders o ORDER BY random() LIMIT 1);" )
 
     cursor.execute("DROP INDEX IF EXISTS mya_index")
     cursor.execute("DROP INDEX IF EXISTS myb_index")
@@ -410,6 +410,8 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # plt.close()
     # return
 
+    print("         ")
+
     print("Small Uninformed: " + str(one))
     print("Small Self-optimized: " + str(two))
     print("Small User-optimized: " + str(three))
@@ -425,6 +427,8 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     print("Large Uninformed: " + str(seven))
     print("Large Self-optimized: " + str(eight))
     print("Large User-optimized: " + str(nine))
+
+    print("           ")
 
     return
 

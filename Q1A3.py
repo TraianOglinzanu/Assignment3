@@ -438,6 +438,8 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # plt.close()
     # return
 
+    print("          ")
+
     print("Small Uninformed: " + str(one))
     print("Small Self-optimized: " + str(two))
     print("Small User-optimized: " + str(three))
@@ -453,6 +455,8 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     print("Large Uninformed: " + str(seven))
     print("Large Self-optimized: " + str(eight))
     print("Large User-optimized: " + str(nine))
+
+    print("          ")
 
     return
 
