@@ -26,6 +26,43 @@ def smallUniformed():
 
     cursor.execute(' PRAGMA automatic_index=false')
 
+    cursor.execute("CREATE TABLE 'CustomersNew' (	'customer_id'	TEXT,	 'customer_postal_code'	INTEGER);       ")
+    cursor.execute("CREATE TABLE 'Order_itemsNew' (	'order_id'	TEXT,	'order_item_id'	INTEGER,	'product_id'	INTEGER,	'seller_id'	INTEGER);     ")
+    cursor.execute("CREATE TABLE 'OrdersNew' ('order_id'	TEXT,'customer_id'	INTEGER); ")  
+    cursor.execute("CREATE TABLE 'SellersNew' ('seller_id'	TEXT,'seller_postal_code'	INTEGER);        ")
+    
+    connection.commit()
+
+    cursor.execute("INSERT INTO CustomersNew SELECT customer_id, customer_postal_code FROM Customers ")
+    #connection.commit()
+    cursor.execute("INSERT INTO Order_itemsNew SELECT order_id, order_item_id, product_id, seller_id FROM Order_items ")
+    connection.commit()
+    cursor.execute("INSERT INTO OrdersNew SELECT order_id, customer_id FROM Orders ")
+    connection.commit()
+    cursor.execute("INSERT INTO SellersNew SELECT seller_id, seller_postal_code FROM Sellers ")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE Customers RENAME TO CustomersOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_items RENAME TO Order_itemsOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Orders RENAME TO OrdersOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Sellers RENAME TO SellersOriginal")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE CustomersNew RENAME TO Customers")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_itemsNew RENAME TO Order_items")
+    connection.commit()
+    cursor.execute("ALTER TABLE OrdersNew RENAME TO Orders")
+    connection.commit()
+    cursor.execute("ALTER TABLE SellersNew RENAME TO Sellers")
+
+    connection.commit()
+
     start_time=time.time()
 
     for i in range(50):
@@ -33,6 +70,24 @@ def smallUniformed():
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP TABLE Customers")
+    connection.commit()
+    cursor.execute("DROP TABLE Order_items")
+    connection.commit()
+    cursor.execute("DROP TABLE Orders")
+    connection.commit()
+    cursor.execute("DROP TABLE Sellers")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE CustomersOriginal RENAME TO Customers")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_itemsOriginal RENAME TO Order_items")
+    connection.commit()
+    cursor.execute("ALTER TABLE OrdersOriginal RENAME TO Orders")
+    connection.commit()
+    cursor.execute("ALTER TABLE SellersOriginal RENAME TO Sellers")
   
     connection.commit()
     connection.close()
@@ -95,7 +150,43 @@ def mediumUniformed():
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
-    cursor.execute(' PRAGMA automatic_index=false')
+
+    cursor.execute("CREATE TABLE 'CustomersNew' (	'customer_id'	TEXT,	 'customer_postal_code'	INTEGER);       ")
+    cursor.execute("CREATE TABLE 'Order_itemsNew' (	'order_id'	TEXT,	'order_item_id'	INTEGER,	'product_id'	INTEGER,	'seller_id'	INTEGER);     ")
+    cursor.execute("CREATE TABLE 'OrdersNew' ('order_id'	TEXT,'customer_id'	INTEGER); ")  
+    cursor.execute("CREATE TABLE 'SellersNew' ('seller_id'	TEXT,'seller_postal_code'	INTEGER);        ")
+    
+    connection.commit()
+
+    cursor.execute("INSERT INTO CustomersNew SELECT customer_id, customer_postal_code FROM Customers ")
+    #connection.commit()
+    cursor.execute("INSERT INTO Order_itemsNew SELECT order_id, order_item_id, product_id, seller_id FROM Order_items ")
+    connection.commit()
+    cursor.execute("INSERT INTO OrdersNew SELECT order_id, customer_id FROM Orders ")
+    connection.commit()
+    cursor.execute("INSERT INTO SellersNew SELECT seller_id, seller_postal_code FROM Sellers ")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE Customers RENAME TO CustomersOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_items RENAME TO Order_itemsOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Orders RENAME TO OrdersOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Sellers RENAME TO SellersOriginal")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE CustomersNew RENAME TO Customers")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_itemsNew RENAME TO Order_items")
+    connection.commit()
+    cursor.execute("ALTER TABLE OrdersNew RENAME TO Orders")
+    connection.commit()
+    cursor.execute("ALTER TABLE SellersNew RENAME TO Sellers")
+
+    connection.commit()
 
     start_time=time.time()
 
@@ -104,6 +195,24 @@ def mediumUniformed():
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP TABLE Customers")
+    connection.commit()
+    cursor.execute("DROP TABLE Order_items")
+    connection.commit()
+    cursor.execute("DROP TABLE Orders")
+    connection.commit()
+    cursor.execute("DROP TABLE Sellers")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE CustomersOriginal RENAME TO Customers")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_itemsOriginal RENAME TO Order_items")
+    connection.commit()
+    cursor.execute("ALTER TABLE OrdersOriginal RENAME TO Orders")
+    connection.commit()
+    cursor.execute("ALTER TABLE SellersOriginal RENAME TO Sellers")
   
     connection.commit()
     connection.close()
@@ -158,7 +267,43 @@ def largeUniformed():
     connect(db_path)
 
     cursor.execute(' PRAGMA foreign_keys=OFF; ')
-    cursor.execute(' PRAGMA automatic_index=false')
+
+    cursor.execute("CREATE TABLE 'CustomersNew' (	'customer_id'	TEXT,	 'customer_postal_code'	INTEGER);       ")
+    cursor.execute("CREATE TABLE 'Order_itemsNew' (	'order_id'	TEXT,	'order_item_id'	INTEGER,	'product_id'	INTEGER,	'seller_id'	INTEGER);     ")
+    cursor.execute("CREATE TABLE 'OrdersNew' ('order_id'	TEXT,'customer_id'	INTEGER); ")  
+    cursor.execute("CREATE TABLE 'SellersNew' ('seller_id'	TEXT,'seller_postal_code'	INTEGER);        ")
+    
+    connection.commit()
+
+    cursor.execute("INSERT INTO CustomersNew SELECT customer_id, customer_postal_code FROM Customers ")
+    #connection.commit()
+    cursor.execute("INSERT INTO Order_itemsNew SELECT order_id, order_item_id, product_id, seller_id FROM Order_items ")
+    connection.commit()
+    cursor.execute("INSERT INTO OrdersNew SELECT order_id, customer_id FROM Orders ")
+    connection.commit()
+    cursor.execute("INSERT INTO SellersNew SELECT seller_id, seller_postal_code FROM Sellers ")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE Customers RENAME TO CustomersOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_items RENAME TO Order_itemsOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Orders RENAME TO OrdersOriginal")
+    connection.commit()
+    cursor.execute("ALTER TABLE Sellers RENAME TO SellersOriginal")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE CustomersNew RENAME TO Customers")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_itemsNew RENAME TO Order_items")
+    connection.commit()
+    cursor.execute("ALTER TABLE OrdersNew RENAME TO Orders")
+    connection.commit()
+    cursor.execute("ALTER TABLE SellersNew RENAME TO Sellers")
+
+    connection.commit()
 
     start_time=time.time()
 
@@ -167,6 +312,24 @@ def largeUniformed():
 
     end_time=time.time()
     exec_time =  (end_time - start_time)*1000
+
+    cursor.execute("DROP TABLE Customers")
+    connection.commit()
+    cursor.execute("DROP TABLE Order_items")
+    connection.commit()
+    cursor.execute("DROP TABLE Orders")
+    connection.commit()
+    cursor.execute("DROP TABLE Sellers")
+
+    connection.commit()
+
+    cursor.execute("ALTER TABLE CustomersOriginal RENAME TO Customers")
+    connection.commit()
+    cursor.execute("ALTER TABLE Order_itemsOriginal RENAME TO Order_items")
+    connection.commit()
+    cursor.execute("ALTER TABLE OrdersOriginal RENAME TO Orders")
+    connection.commit()
+    cursor.execute("ALTER TABLE SellersOriginal RENAME TO Sellers")
   
     connection.commit()
     connection.close()
@@ -247,21 +410,21 @@ def bar_chart(one, two, three, four, five, six, seven, eight, nine):
     # plt.close()
     # return
 
-    print("Small Unoptimized: " + str(one))
-    print("Small SelfOptimized: " + str(two))
-    print("Small UserOptimized: " + str(three))
+    print("Small Uninformed: " + str(one))
+    print("Small Self-optimized: " + str(two))
+    print("Small User-optimized: " + str(three))
 
-    # print("------------------------------------")
+    print("------------------------------------")
 
-    # print("Medium Unoptimized: " + str(four))
-    # print("Medium SelfOptimized: " + str(five))
-    # print("Medium UserOptimized: " + str(six))
+    print("Medium Uninformed: " + str(four))
+    print("Medium Self-optimized: " + str(five))
+    print("Medium User-optimized: " + str(six))
 
-    # print("------------------------------------")
+    print("------------------------------------")
 
-    # print("Large Uninformed: " + str(seven))
-    # print("Large Self-optimized: " + str(eight))
-    # print("Large User-optimized: " + str(nine))
+    print("Large Uninformed: " + str(seven))
+    print("Large Self-optimized: " + str(eight))
+    print("Large User-optimized: " + str(nine))
 
     return
 
