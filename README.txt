@@ -4,7 +4,8 @@ GROUP MEMBER CCID'S:
 
 1) oglinzan
 2) xiangtia
-3) wchang1
+
+!! Our group only had 2 memebers work on the assignment !!
 
 !! We declare that we did not collaborate with anyone outside our own group in this assignment !!
 
